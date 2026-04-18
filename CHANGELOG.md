@@ -11,6 +11,8 @@ and this project aims to follow [Semantic Versioning](https://semver.org/spec/v2
 - Bootstrapped the public repository structure for Agentarium.
 - Added repository hygiene docs, issue templates, and release metadata scaffolding.
 - Linked the main repo to the dedicated public docs and releases repositories.
+- Added the initial npm-workspace monorepo shell with a Next.js Forge prototype and shared contracts package.
+- Added CI and release coordination docs for cross-repo shipping discipline.
 
 ## [0.0.0-bootstrap] - 2026-04-18
 

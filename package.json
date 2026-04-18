@@ -1,0 +1,19 @@
+{
+  "name": "agentarium",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Spatial operating system for AI agents.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @agentarium/web",
+    "build": "npm run build --workspace @agentarium/web",
+    "lint": "npm run lint --workspace @agentarium/web",
+    "typecheck": "npm run typecheck --workspace @agentarium/web"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

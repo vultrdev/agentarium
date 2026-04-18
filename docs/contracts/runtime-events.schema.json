@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentarium.app/schemas/runtime-events.schema.json",
+  "title": "Agentarium Runtime Event",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "timestamp",
+    "session_id",
+    "world_id",
+    "actor",
+    "payload"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "type": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "session_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string" },
+    "world_id": { "type": "string", "minLength": 1 },
+    "room_id": { "type": "string" },
+    "actor": {
+      "type": "object",
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["agent", "user", "system", "runtime", "tool"]
+        },
+        "id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "subject": {
+      "type": "object",
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["task", "artifact", "agent", "room", "memory", "approval", "replay_bookmark"]
+        },
+        "id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "correlation_id": { "type": "string" },
+    "causation_id": { "type": "string" },
+    "visibility": {
+      "type": "string",
+      "enum": ["internal", "user_visible", "public_candidate"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

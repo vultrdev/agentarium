@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentarium.app/schemas/world-state.schema.json",
+  "title": "Agentarium World State",
+  "type": "object",
+  "required": [
+    "world_id",
+    "session_id",
+    "updated_at",
+    "active_room_id",
+    "rooms",
+    "agents",
+    "objects",
+    "artifacts",
+    "approvals",
+    "timeline"
+  ],
+  "properties": {
+    "world_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "active_room_id": { "type": "string", "minLength": 1 },
+    "rooms": { "type": "array", "items": { "$ref": "#/$defs/room" } },
+    "agents": { "type": "array", "items": { "$ref": "#/$defs/agent" } },
+    "objects": { "type": "array", "items": { "$ref": "#/$defs/object" } },
+    "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+    "approvals": { "type": "array", "items": { "$ref": "#/$defs/approval" } },
+    "timeline": { "$ref": "#/$defs/timeline" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "room": {
+      "type": "object",
+      "required": ["id", "kind", "title", "status", "occupant_agent_ids", "object_ids", "task_ids"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "type": "string" },
+        "title": { "type": "string" },
+        "status": { "type": "string" },
+        "occupant_agent_ids": { "type": "array", "items": { "type": "string" } },
+        "object_ids": { "type": "array", "items": { "type": "string" } },
+        "task_ids": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "agent": {
+      "type": "object",
+      "required": ["id", "role", "display_name", "room_id", "state", "status_text"],
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string" },
+        "display_name": { "type": "string" },
+        "room_id": { "type": "string" },
+        "state": { "type": "string" },
+        "status_text": { "type": "string" },
+        "current_task_id": { "type": "string" },
+        "focused_artifact_id": { "type": "string" },
+        "position": {
+          "type": "object",
+          "properties": {
+            "anchor": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "interaction_target_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "object": {
+      "type": "object",
+      "required": ["id", "kind", "room_id", "title", "state"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "type": "string" },
+        "room_id": { "type": "string" },
+        "title": { "type": "string" },
+        "linked_entity_id": { "type": "string" },
+        "state": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["id", "type", "title", "state", "room_id", "storage_ref", "version"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "state": { "type": "string" },
+        "owner_agent_id": { "type": "string" },
+        "origin_task_id": { "type": "string" },
+        "room_id": { "type": "string" },
+        "storage_ref": { "type": "string" },
+        "preview_text": { "type": "string" },
+        "version": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "approval": {
+      "type": "object",
+      "required": ["id", "kind", "state", "room_id", "question"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "type": "string" },
+        "state": { "type": "string" },
+        "room_id": { "type": "string" },
+        "target_entity_id": { "type": "string" },
+        "requested_by_agent_id": { "type": "string" },
+        "question": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "timeline": {
+      "type": "object",
+      "required": ["last_event_id", "bookmark_ids"],
+      "properties": {
+        "last_event_id": { "type": "string" },
+        "bookmark_ids": { "type": "array", "items": { "type": "string" } },
+        "event_count": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

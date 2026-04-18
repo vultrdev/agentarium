@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Public docs
+    url: https://github.com/vultrdev/agentarium-docs
+    about: Read the public architecture and contribution docs first.
